@@ -94,6 +94,12 @@
         <span class="nav-title">人生三万天</span>
       </div>
       <div class="nav-right">
+        <button class="nav-btn" id="noise-btn" title="白噪音">🎵</button>
+        <button class="nav-btn" id="gratitude-btn" title="感恩日记">📝</button>
+        <button class="nav-btn" id="meditation-btn" title="冥想">🧘</button>
+        <button class="nav-btn" id="challenge-btn" title="每日挑战">🎲</button>
+        <button class="nav-btn" id="achievements-btn" title="成就">🏆</button>
+        <button class="nav-btn" id="report-btn" title="生命报告">📊</button>
         <button class="nav-btn" id="wallpaper-btn" title="生成壁纸">🎨</button>
         <button class="nav-btn" id="widget-btn" title="小组件">📱</button>
         <button class="nav-btn" id="tips-btn" title="解压小贴士">💡</button>
@@ -282,12 +288,145 @@
     </div>
   </div>
 
+  <!-- ===== 白噪音播放器弹窗 ===== -->
+  <div class="modal" id="noise-modal">
+    <div class="modal-content noise-modal-content">
+      <button class="modal-close" id="noise-close">&times;</button>
+      <h2>🎵 白噪音播放器</h2>
+      <p class="modal-desc">混合你喜欢的声音，创造专属氛围</p>
+      <div class="noise-grid" id="noise-grid"></div>
+      <div class="noise-mixer-info">
+        <span id="noise-active-count">0</span> 个声音正在播放
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 感恩日记弹窗 ===== -->
+  <div class="modal" id="gratitude-modal">
+    <div class="modal-content gratitude-modal-content">
+      <button class="modal-close" id="gratitude-close">&times;</button>
+      <h2>📝 每日感恩日记</h2>
+      <div class="gratitude-stats">
+        <div class="grat-stat"><span class="grat-stat-value" id="grat-streak">0</span><span class="grat-stat-label">天连续</span></div>
+        <div class="grat-stat"><span class="grat-stat-value" id="grat-total">0</span><span class="grat-stat-label">条感恩</span></div>
+      </div>
+      <div class="gratitude-prompt" id="gratitude-prompt"></div>
+      <div class="gratitude-inputs" id="gratitude-inputs">
+        <div class="grat-input-group">
+          <span class="grat-num">1</span>
+          <input type="text" class="grat-input" id="grat-0" placeholder="今天感谢什么...">
+        </div>
+        <div class="grat-input-group">
+          <span class="grat-num">2</span>
+          <input type="text" class="grat-input" id="grat-1" placeholder="今天感谢什么...">
+        </div>
+        <div class="grat-input-group">
+          <span class="grat-num">3</span>
+          <input type="text" class="grat-input" id="grat-2" placeholder="今天感谢什么...">
+        </div>
+      </div>
+      <button class="btn-primary" id="save-gratitude">
+        <span>💾 保存今日感恩</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== 冥想计时器弹窗 ===== -->
+  <div class="modal" id="meditation-modal">
+    <div class="modal-content meditation-modal-content">
+      <button class="modal-close" id="meditation-close">&times;</button>
+      <h2>🧘 冥想计时器</h2>
+      <div class="meditation-ring-container">
+        <svg class="meditation-ring" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="4"/>
+          <circle cx="100" cy="100" r="90" fill="none" stroke="url(#med-gradient)" stroke-width="4"
+            stroke-linecap="round" stroke-dasharray="565.48" stroke-dashoffset="0"
+            transform="rotate(-90 100 100)" id="med-progress"/>
+          <defs>
+            <linearGradient id="med-gradient"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+          </defs>
+        </svg>
+        <div class="meditation-time" id="med-time">05:00</div>
+      </div>
+      <div class="meditation-presets">
+        <button class="med-preset active" data-minutes="5">5 分钟</button>
+        <button class="med-preset" data-minutes="10">10 分钟</button>
+        <button class="med-preset" data-minutes="15">15 分钟</button>
+        <button class="med-preset" data-minutes="20">20 分钟</button>
+        <button class="med-preset" data-minutes="30">30 分钟</button>
+      </div>
+      <div class="meditation-controls">
+        <button class="btn-primary" id="med-start">开始冥想</button>
+        <button class="btn-secondary hidden" id="med-pause">暂停</button>
+        <button class="btn-secondary hidden" id="med-stop">结束</button>
+      </div>
+      <div class="meditation-stats">
+        <div class="med-stat">🧘 已完成 <strong id="med-sessions">0</strong> 次</div>
+        <div class="med-stat">⏱️ 累计 <strong id="med-total-min">0</strong> 分钟</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 年度生命报告弹窗 ===== -->
+  <div class="modal" id="report-modal">
+    <div class="modal-content report-modal-content">
+      <button class="modal-close" id="report-close">&times;</button>
+      <h2>📊 年度生命报告</h2>
+      <div id="report-content"></div>
+    </div>
+  </div>
+
+  <!-- ===== 每日挑战弹窗 ===== -->
+  <div class="modal" id="challenge-modal">
+    <div class="modal-content challenge-modal-content">
+      <button class="modal-close" id="challenge-close">&times;</button>
+      <h2>🎲 今日挑战</h2>
+      <div class="challenge-card" id="challenge-card">
+        <div class="challenge-emoji" id="ch-emoji"></div>
+        <div class="challenge-title" id="ch-title"></div>
+        <div class="challenge-desc" id="ch-desc"></div>
+        <div class="challenge-category" id="ch-category"></div>
+        <div class="challenge-actions">
+          <button class="btn-primary" id="ch-complete">✅ 完成挑战</button>
+          <button class="btn-secondary" id="ch-refresh">🔄 换一个</button>
+        </div>
+      </div>
+      <div class="challenge-stats">
+        <div class="ch-stat"><span class="ch-stat-value" id="ch-streak">0</span><span class="ch-stat-label">天连续</span></div>
+        <div class="ch-stat"><span class="ch-stat-value" id="ch-completed">0</span><span class="ch-stat-label">个完成</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 成就系统弹窗 ===== -->
+  <div class="modal" id="achievements-modal">
+    <div class="modal-content achievements-modal-content">
+      <button class="modal-close" id="achievements-close">&times;</button>
+      <h2>🏆 成就系统</h2>
+      <div class="achievements-progress">
+        <div class="ach-progress-text">已解锁 <span id="ach-unlocked-count">0</span> / <span id="ach-total-count">0</span></div>
+        <div class="ach-progress-bar"><div class="ach-progress-fill" id="ach-progress-fill"></div></div>
+      </div>
+      <div class="achievements-grid" id="achievements-grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== 成就解锁通知 ===== -->
+  <div class="achievement-toast" id="achievement-toast">
+    <div class="achievement-toast-icon" id="ach-toast-icon"></div>
+    <div class="achievement-toast-info">
+      <div class="achievement-toast-title">🎉 成就解锁！</div>
+      <div class="achievement-toast-name" id="ach-toast-name"></div>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div class="toast" id="toast"></div>
 
   <script src="js/quotes.js"></script>
   <script src="js/tips.js"></script>
   <script src="js/wallpaper.js"></script>
+  <script src="js/features.js"></script>
   <script src="js/app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {

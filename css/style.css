@@ -1354,3 +1354,497 @@ input[type="checkbox"]:checked + .toggle::after {
   background: rgba(99,102,241,0.3);
   color: white;
 }
+
+/* ========================================== */
+/* ===== 新功能样式 ===== */
+/* ========================================== */
+
+.modal-desc {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.btn-secondary {
+  padding: 10px 24px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.hidden { display: none !important; }
+
+/* ===== 白噪音播放器 ===== */
+.noise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.noise-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+.noise-item:hover {
+  background: rgba(255,255,255,0.06);
+}
+.noise-item.active {
+  border-color: var(--primary);
+  background: rgba(99,102,241,0.12);
+}
+
+.noise-emoji { font-size: 1.5rem; }
+.noise-name { font-size: 0.75rem; color: var(--text-secondary); }
+
+.noise-volume {
+  width: 60px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  outline: none;
+  display: none;
+}
+.noise-item.active .noise-volume { display: block; }
+.noise-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  cursor: pointer;
+}
+
+.noise-mixer-info {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ===== 感恩日记 ===== */
+.gratitude-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.grat-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+}
+
+.grat-stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-light);
+}
+
+.grat-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.gratitude-prompt {
+  padding: 12px 16px;
+  background: rgba(99,102,241,0.08);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.gratitude-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.grat-input-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.grat-num {
+  width: 28px;
+  height: 28px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.grat-input {
+  flex: 1;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: var(--transition);
+}
+.grat-input:focus {
+  border-color: var(--primary);
+  background: rgba(99,102,241,0.08);
+}
+.grat-input::placeholder { color: var(--text-muted); }
+
+/* ===== 冥想计时器 ===== */
+.meditation-modal-content {
+  text-align: center;
+}
+
+.meditation-ring-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 24px auto;
+}
+
+.meditation-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.meditation-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
+
+.meditation-presets {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.med-preset {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: 20px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.med-preset.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.meditation-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.meditation-controls .btn-primary,
+.meditation-controls .btn-secondary {
+  min-width: 120px;
+}
+
+.meditation-stats {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.meditation-stats strong {
+  color: var(--text-primary);
+}
+
+/* ===== 年度报告 ===== */
+.report-section {
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.report-section:last-child { border-bottom: none; }
+
+.report-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.report-stat {
+  padding: 14px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.report-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-light), #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.report-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.report-stage {
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1));
+  border-radius: var(--radius);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.report-stage-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.report-stage-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.report-bar {
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.report-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), #ec4899);
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+/* ===== 每日挑战 ===== */
+.challenge-card {
+  text-align: center;
+  padding: 28px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+}
+
+.challenge-emoji {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.challenge-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.challenge-desc {
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.challenge-category {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(99,102,241,0.12);
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: var(--primary-light);
+  margin-bottom: 16px;
+}
+
+.challenge-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.challenge-stats {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.ch-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+}
+
+.ch-stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-light);
+}
+
+.ch-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.challenge-card.completed {
+  border-color: #10b981;
+  background: rgba(16,185,129,0.06);
+}
+
+/* ===== 成就系统 ===== */
+.achievements-progress {
+  margin-bottom: 20px;
+}
+
+.ach-progress-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.ach-progress-bar {
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.ach-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), #ec4899);
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.achievement-item {
+  padding: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.achievement-item.locked {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+.achievement-item:not(.locked):hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-2px);
+}
+
+.achievement-emoji {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.achievement-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.achievement-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* 成就解锁通知 */
+.achievement-toast {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.95), rgba(236,72,153,0.95));
+  border-radius: var(--radius);
+  z-index: 3000;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  transition: top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.achievement-toast.show {
+  top: 20px;
+}
+
+.achievement-toast-icon {
+  font-size: 2rem;
+}
+
+.achievement-toast-title {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.achievement-toast-name {
+  font-size: 1rem;
+  font-weight: 700;
+}
