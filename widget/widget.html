@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人生三万天 · 小组件</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans SC', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 20px;
+      padding: 14px;
+      width: 170px;
+      height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #f1f5f9;
+      overflow: hidden;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: rgba(255,255,255,0.4);
+    }
+    .days {
+      font-size: 36px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #818cf8, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .label { font-size: 10px; color: rgba(255,255,255,0.5); }
+    .progress {
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #818cf8, #ec4899);
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span>🌅 人生三万天</span>
+    <span id="date"></span>
+  </div>
+  <div>
+    <div class="days" id="days">--</div>
+    <div class="label">天 剩余</div>
+  </div>
+  <div class="progress">
+    <div class="progress-fill" id="bar" style="width: 0%"></div>
+  </div>
+  <script>
+    // 从 URL 参数或 localStorage 获取生日
+    const params = new URLSearchParams(window.location.search);
+    const birthday = params.get('birthday') || localStorage.getItem('life30000_birthday');
+    const lifespan = parseInt(params.get('lifespan') || localStorage.getItem('life30000_lifespan') || '80');
+    
+    if (birthday) {
+      const birth = new Date(birthday);
+      const today = new Date();
+      const daysLived = Math.floor((today - birth) / 86400000);
+      const totalDays = lifespan * 365.25;
+      const daysRemaining = Math.max(0, Math.floor(totalDays - daysLived));
+      const percent = ((daysLived / totalDays) * 100).toFixed(1);
+      
+      document.getElementById('days').textContent = daysRemaining.toLocaleString();
+      document.getElementById('bar').style.width = percent + '%';
+    } else {
+      document.getElementById('days').textContent = '?';
+    }
+    
+    const d = new Date();
+    document.getElementById('date').textContent = `${d.getMonth()+1}/${d.getDate()}`;
+  </script>
+</body>
+</html>

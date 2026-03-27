@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🌅 人生三万天</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a0a1a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 粒子背景 -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- ===== 登录页面 ===== -->
+  <div id="login-page" class="page active">
+    <div class="login-container">
+      <div class="login-glow"></div>
+      <h1 class="login-title">
+        <span class="sun-icon">🌅</span>
+        <span>人生三万天</span>
+      </h1>
+      <p class="login-subtitle">每一天都是独一无二的礼物</p>
+      
+      <div class="login-tabs">
+        <button class="tab-btn active" data-tab="login">登录</button>
+        <button class="tab-btn" data-tab="register">注册</button>
+      </div>
+      
+      <form id="login-form" class="auth-form">
+        <div class="input-group">
+          <input type="text" id="login-username" placeholder="用户名" required autocomplete="username">
+          <div class="input-line"></div>
+        </div>
+        <div class="input-group">
+          <input type="password" id="login-password" placeholder="密码" required autocomplete="current-password">
+          <div class="input-line"></div>
+        </div>
+        <button type="submit" class="btn-primary">
+          <span>进入你的三万天</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+      
+      <form id="register-form" class="auth-form hidden">
+        <div class="input-group">
+          <input type="text" id="reg-username" placeholder="用户名" required>
+          <div class="input-line"></div>
+        </div>
+        <div class="input-group">
+          <input type="password" id="reg-password" placeholder="密码" required>
+          <div class="input-line"></div>
+        </div>
+        <div class="input-group">
+          <input type="password" id="reg-confirm" placeholder="确认密码" required>
+          <div class="input-line"></div>
+        </div>
+        <button type="submit" class="btn-primary">
+          <span>创建账户</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+      
+      <div class="login-quote" id="login-quote"></div>
+    </div>
+  </div>
+
+  <!-- ===== 生日输入页面 ===== -->
+  <div id="birthday-page" class="page">
+    <div class="birthday-container">
+      <h2>🎂 你的生日是？</h2>
+      <p class="birthday-hint">告诉我们你的生日，开始计算你的三万天旅程</p>
+      <div class="birthday-input-area">
+        <input type="date" id="birthday-input" required>
+        <button id="start-journey-btn" class="btn-primary">
+          <span>开启旅程</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div class="birthday-visual" id="birthday-visual"></div>
+    </div>
+  </div>
+
+  <!-- ===== 主页面 ===== -->
+  <div id="main-page" class="page">
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <span class="nav-logo">🌅</span>
+        <span class="nav-title">人生三万天</span>
+      </div>
+      <div class="nav-right">
+        <button class="nav-btn" id="wallpaper-btn" title="生成壁纸">🎨</button>
+        <button class="nav-btn" id="widget-btn" title="小组件">📱</button>
+        <button class="nav-btn" id="tips-btn" title="解压小贴士">💡</button>
+        <button class="nav-btn" id="settings-btn" title="设置">⚙️</button>
+        <button class="nav-btn" id="logout-btn" title="退出">👋</button>
+      </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+      <!-- 今日信息卡片 -->
+      <section class="today-card" id="today-card">
+        <div class="today-header">
+          <div class="today-date" id="today-date"></div>
+          <div class="today-day-num" id="today-day-num"></div>
+        </div>
+        <div class="life-progress">
+          <div class="progress-ring-container">
+            <svg class="progress-ring" viewBox="0 0 200 200">
+              <circle class="progress-bg" cx="100" cy="100" r="90"/>
+              <circle class="progress-fill" cx="100" cy="100" r="90" id="progress-circle"/>
+            </svg>
+            <div class="progress-text">
+              <div class="progress-days" id="days-lived">0</div>
+              <div class="progress-label">天已过</div>
+            </div>
+          </div>
+          <div class="progress-stats">
+            <div class="stat">
+              <span class="stat-value" id="days-remaining">0</span>
+              <span class="stat-label">天剩余</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="years-lived">0</span>
+              <span class="stat-label">岁</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="percent-lived">0%</span>
+              <span class="stat-label">已度过</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 今日金句 -->
+      <section class="quote-card" id="quote-card">
+        <div class="quote-icon">✨</div>
+        <blockquote class="quote-text" id="quote-text"></blockquote>
+        <div class="quote-author" id="quote-author"></div>
+        <div class="quote-actions">
+          <button class="quote-btn" id="refresh-quote" title="换一句">🔄</button>
+          <button class="quote-btn" id="share-quote" title="分享">📤</button>
+          <button class="quote-btn" id="copy-quote" title="复制">📋</button>
+        </div>
+      </section>
+
+      <!-- 生命时间线 -->
+      <section class="timeline-card" id="timeline-card">
+        <h3>⏳ 你的时间线</h3>
+        <div class="timeline-grid" id="timeline-grid"></div>
+        <div class="timeline-legend">
+          <span class="legend-item"><span class="dot lived"></span>已度过</span>
+          <span class="legend-item"><span class="dot today"></span>今天</span>
+          <span class="legend-item"><span class="dot future"></span>未来</span>
+        </div>
+      </section>
+
+      <!-- 里程碑 -->
+      <section class="milestone-card" id="milestone-card">
+        <h3>🏆 人生里程碑</h3>
+        <div class="milestone-list" id="milestone-list"></div>
+      </section>
+
+      <!-- 趣味数据 -->
+      <section class="fun-stats-card" id="fun-stats-card">
+        <h3>🎯 趣味数据</h3>
+        <div class="fun-grid" id="fun-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===== 壁纸生成器弹窗 ===== -->
+  <div class="modal" id="wallpaper-modal">
+    <div class="modal-content wallpaper-modal-content">
+      <button class="modal-close" id="wallpaper-close">&times;</button>
+      <h2>🎨 生成你的专属壁纸</h2>
+      <div class="wallpaper-preview">
+        <canvas id="wallpaper-canvas" width="1080" height="1920"></canvas>
+      </div>
+      <div class="wallpaper-options">
+        <div class="style-options">
+          <label>风格：</label>
+          <div class="style-grid" id="style-grid">
+            <button class="style-btn active" data-style="gradient">🌅 渐变</button>
+            <button class="style-btn" data-style="cosmic">🌌 宇宙</button>
+            <button class="style-btn" data-style="nature">🌿 自然</button>
+            <button class="style-btn" data-style="minimal">◽ 极简</button>
+            <button class="style-btn" data-style="retro">🕹️ 复古</button>
+            <button class="style-btn" data-style="watercolor">🎨 水彩</button>
+          </div>
+        </div>
+        <div class="size-options">
+          <label>尺寸：</label>
+          <select id="wallpaper-size">
+            <option value="1080x1920">手机壁纸 (1080×1920)</option>
+            <option value="1920x1080">桌面壁纸 (1920×1080)</option>
+            <option value="1080x1080">Instagram (1080×1080)</option>
+            <option value="1290x2796">iPhone 15 Pro (1290×2796)</option>
+            <option value="2560x1440">2K 桌面 (2560×1440)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-primary" id="download-wallpaper">
+        <span>下载壁纸</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== 解压小贴士弹窗 ===== -->
+  <div class="modal" id="tips-modal">
+    <div class="modal-content tips-modal-content">
+      <button class="modal-close" id="tips-close">&times;</button>
+      <h2>💡 解压小贴士 & 趣味工具</h2>
+      <div class="tips-tabs">
+        <button class="tips-tab active" data-category="breathing">🫁 呼吸</button>
+        <button class="tips-tab" data-category="game">🎮 小游戏</button>
+        <button class="tips-tab" data-category="tips">📖 解压</button>
+        <button class="tips-tab" data-category="quotes">💭 语录</button>
+      </div>
+      <div class="tips-content" id="tips-content">
+        <!-- 动态填充 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 小组件弹窗 ===== -->
+  <div class="modal" id="widget-modal">
+    <div class="modal-content widget-modal-content">
+      <button class="modal-close" id="widget-close">&times;</button>
+      <h2>📱 桌面小组件</h2>
+      <p class="widget-desc">复制代码或截图，添加到你的桌面</p>
+      <div class="widget-previews" id="widget-previews">
+        <!-- 动态填充 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 设置弹窗 ===== -->
+  <div class="modal" id="settings-modal">
+    <div class="modal-content settings-modal-content">
+      <button class="modal-close" id="settings-close">&times;</button>
+      <h2>⚙️ 设置</h2>
+      <div class="settings-list">
+        <div class="setting-item">
+          <label>生日</label>
+          <input type="date" id="settings-birthday">
+        </div>
+        <div class="setting-item">
+          <label>预期寿命</label>
+          <div class="range-group">
+            <input type="range" id="settings-lifespan" min="60" max="120" value="80">
+            <span id="lifespan-value">80 岁</span>
+          </div>
+        </div>
+        <div class="setting-item">
+          <label>主题色</label>
+          <div class="theme-colors" id="theme-colors">
+            <button class="color-btn active" data-color="#6366f1" style="background:#6366f1"></button>
+            <button class="color-btn" data-color="#ec4899" style="background:#ec4899"></button>
+            <button class="color-btn" data-color="#10b981" style="background:#10b981"></button>
+            <button class="color-btn" data-color="#f59e0b" style="background:#f59e0b"></button>
+            <button class="color-btn" data-color="#ef4444" style="background:#ef4444"></button>
+            <button class="color-btn" data-color="#8b5cf6" style="background:#8b5cf6"></button>
+          </div>
+        </div>
+        <div class="setting-item">
+          <label>每日提醒</label>
+          <div class="toggle-group">
+            <input type="checkbox" id="settings-reminder">
+            <label for="settings-reminder" class="toggle"></label>
+          </div>
+        </div>
+        <button class="btn-primary" id="save-settings">保存设置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/quotes.js"></script>
+  <script src="js/tips.js"></script>
+  <script src="js/wallpaper.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
