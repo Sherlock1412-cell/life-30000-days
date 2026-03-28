@@ -3,7 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>🌅 人生三万天</title>
+  <title>🌅 Life 30,000 Days | 人生三万天</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Visualize your life's remaining days & find daily motivation. A beautiful mindfulness web app with life countdown, daily quotes, meditation, white noise, wallpaper generator and more.">
+  <meta name="keywords" content="life countdown,mindfulness,daily motivation,meditation,white noise,人生三万天,生命倒计时,冥想,白噪音">
+  <meta name="author" content="Sherlock1412">
+  <link rel="canonical" href="https://life-30000-days.netlify.app">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://life-30000-days.netlify.app">
+  <meta property="og:title" content="🌅 Life 30,000 Days | 人生三万天">
+  <meta property="og:description" content="Visualize your life's remaining days & find daily motivation. A beautiful mindfulness web app with life countdown, daily quotes, meditation, white noise and more.">
+  <meta property="og:image" content="https://life-30000-days.netlify.app/assets/social-share.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://life-30000-days.netlify.app">
+  <meta name="twitter:title" content="🌅 Life 30,000 Days | 人生三万天">
+  <meta name="twitter:description" content="Visualize your life's remaining days & find daily motivation.">
+  <meta name="twitter:image" content="https://life-30000-days.netlify.app/assets/social-share.png">
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0a0a1a">
@@ -11,6 +32,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2511686711761568" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- 粒子背景 -->
@@ -219,11 +243,14 @@
         <div class="fun-grid" id="fun-grid"></div>
       </section>
 
-      <!-- 广告位 (中间位置) -->
+      <!-- Google AdSense 广告 (中间位置) -->
       <section class="main-ad-slot" id="main-ad-slot">
-        <!-- 👇 注册 Google AdSense 或穿山甲后，把广告代码粘贴到这里 -->
-        <!-- <ins class="adsbygoogle" ...></ins> -->
-        <div class="ad-placeholder">📢 广告位 — 接入广告平台后自动展示</div>
+        <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-2511686711761568"
+          data-ad-slot="auto"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
       </section>
     </main>
   </div>
@@ -349,11 +376,14 @@
           </div>
         </div>
         <button class="btn-primary" id="save-settings">保存设置</button>
-        <!-- 广告位 (Google AdSense / 穿山甲) -->
+        <!-- Google AdSense 广告 -->
         <div class="ad-slot" id="ad-slot-settings" style="margin-top:16px">
-          <!-- 👇 注册广告平台后，把广告代码粘贴到这里 -->
-          <!-- <ins class="adsbygoogle" ...></ins> -->
-          <div class="ad-placeholder">📢 广告位</div>
+          <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2511686711761568"
+            data-ad-slot="auto"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
         </div>
       </div>
     </div>
@@ -550,6 +580,8 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').catch(() => {});
     }
+    // Initialize Google AdSense ads
+    (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </body>
 </html>

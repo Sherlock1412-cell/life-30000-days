@@ -4,9 +4,9 @@
 
 A beautiful mindfulness web app that visualizes your life's remaining days. Enter your birthday to see how many days you've lived and how many remain — with daily motivation, wallpapers, wellness tools, and more.
 
-一个关于时间、生命与珍惜的 Web 应用。通过输入出生年月日，计算你人生已度过的天数和剩余天数，生成每日激励语句和精美壁纸。
+一个关于时间、生命与珍惜的 Web 应用。
 
-**[🇺🇸 Product Hunt](https://www.producthunt.com)** | **[🔥 Live Demo](#)** | **[📖 文档](#-功能特性)**
+**[🚀 Live Demo](https://life-30000-days.netlify.app)** | **[🌅 Product Hunt](https://www.producthunt.com)** | **[🔥 爱发电支持](https://afdian.com/a/sherlock1412)**
 
 ## ✨ 功能特性
 
@@ -14,7 +14,6 @@ A beautiful mindfulness web app that visualizes your life's remaining days. Ente
 - **生命倒计时** — 精确计算已度过和剩余的天数
 - **生命进度环** — 可视化展示人生进度
 - **每日金句** — 60+ 条精选激励语句，每天自动更换
-- **专属激励语** — 根据年龄和剩余天数生成个性化激励
 - **生命时间线** — 用像素点可视化你的人生
 - **人生里程碑** — 追踪重要人生节点
 - **趣味数据** — 心跳、呼吸、步数等生活数据估算
@@ -44,41 +43,31 @@ A beautiful mindfulness web app that visualizes your life's remaining days. Ente
 - 每天记录 3 件感恩的事
 - 随机提示问题引导思考
 - 连续天数统计
-- 总感恩条数统计
 
 ### 🧘 冥想计时器
 - 5/10/15/20/30 分钟预设
 - 渐变环形进度可视化
-- 开始/暂停/结束控制
 - 累计冥想次数和时长统计
 
 ### 📊 年度生命报告
 - 生命阶段识别（幼儿期→黄金期）
 - 生命中的数字：心跳、呼吸、睡眠、步数
 - 今年进度追踪
-- 应用使用数据汇总
 
-### 🎲 随机挑战任务
+### 🎲 每日挑战
 - 26 种创意/社交/健康/学习/生活类挑战
 - 每天自动推荐一个
-- 可手动换一个新挑战
 - 连续完成天数统计
 
 ### 🏆 成就系统
 - 30+ 个可解锁成就
-- 涵盖：使用天数、生命里程碑、感恩、冥想、挑战、壁纸、白噪音、金句
 - 成就解锁弹窗动画通知
-- 总解锁进度条
 
-### 🔐 用户系统
-- 注册 / 登录
-- 数据本地存储（localStorage）
-- 个性化设置（生日、预期寿命、主题色）
-
-### 📲 跨平台
-- **Web 应用** — 响应式设计，支持桌面和移动端
-- **PWA 支持** — 可安装到手机桌面，离线可用
-- **小组件** — 支持桌面嵌入
+### 💰 变现
+- Google AdSense 广告集成
+- 爱发电捐赠支持：[afdian.com/a/sherlock1412](https://afdian.com/a/sherlock1412)
+- Buy Me a Coffee 支持
+- Premium 激活码系统
 
 ## 🚀 快速开始
 
@@ -103,9 +92,10 @@ life-30000-days/
 │   ├── wallpaper.js    # 壁纸生成引擎
 │   └── features.js     # 新功能模块 (白噪音/冥想/感恩/挑战/成就/报告)
 ├── widget/widget.html  # 嵌入式小组件
-├── assets/             # 图标
+├── assets/             # 图标 & 社交分享图
 ├── manifest.json       # PWA 配置
-├── sw.js              # Service Worker
+├── sw.js               # Service Worker
+├── netlify.toml        # Netlify 部署配置
 └── README.md
 ```
 
@@ -116,3 +106,9 @@ life-30000-days/
 ## 📜 License
 
 MIT
+
+## ☕ 支持
+
+如果这个项目对你有帮助，欢迎请我喝杯咖啡：
+- 🔥 [爱发电](https://afdian.com/a/sherlock1412)
+- ☕ [Buy Me a Coffee](https://buymeacoffee.com/sherlock1412)
