@@ -4,7 +4,7 @@
 
 - **Product Name:** Life 30,000 Days
 - **Tagline:** A beautiful life countdown that makes every day count
-- **Website:** (部署后填写，推荐 Vercel/Netlify 免费部署)
+- **Website:** https://life-30000-days.vercel.app
 - **Category:** Health & Fitness, Productivity, Design Tools
 - **Topics:** mindfulness, wellness, self-improvement, life-tracking, daily-motivation
 
