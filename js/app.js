@@ -19,12 +19,12 @@
   // ===== Premium 系统 =====
   const PREMIUM_CONFIG = {
     // 👇 你注册后填入你的链接
-    afdian: 'https://afdian.com/a/YOUR_USERNAME',    // 爱发电主页
+    afdian: 'https://afdian.com/a/sherlock1412',    // 爱发电主页
     buymeacoffee: 'https://buymeacoffee.com/YOUR_USERNAME',  // Buy Me a Coffee
     // 👇 Premium 激活码（用户捐赠后你发给他们一个码）
     activationCodes: [
-      // 示例: 'THANKS2024', 'LIFE30000'
-      // 实际使用时请更换为自定义的激活码
+      'LIFE30000'
+      
     ],
     // Premium 专属主题色
     premiumColors: [
@@ -85,7 +85,7 @@
 
     function resize() {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas。height = window.innerHeight;
     }
     resize();
     window.addEventListener('resize', resize);
