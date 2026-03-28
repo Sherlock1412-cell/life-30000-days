@@ -20,7 +20,7 @@
   const PREMIUM_CONFIG = {
     // 👇 你注册后填入你的链接
     afdian: 'https://afdian.com/a/sherlock1412',    // 爱发电主页
-    buymeacoffee: 'https://buymeacoffee.com/YOUR_USERNAME',  // Buy Me a Coffee
+    buymeacoffee: 'https://buymeacoffee.com/sherlock1412',  // Buy Me a Coffee
     // 👇 Premium 激活码（用户捐赠后你发给他们一个码）
     activationCodes: [
       'LIFE30000'
