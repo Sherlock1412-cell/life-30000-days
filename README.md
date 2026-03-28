@@ -6,7 +6,7 @@ A beautiful mindfulness web app that visualizes your life's remaining days. Ente
 
 一个关于时间、生命与珍惜的 Web 应用。
 
-**[🚀 Live Demo](https://life-30000-days.netlify.app)** | **[🌅 Product Hunt](https://www.producthunt.com)** | **[🔥 爱发电支持](https://afdian.com/a/sherlock1412)**
+**[🚀 Live Demo](https://life-30000-days.vercel.app)** | **[🌅 Product Hunt](https://www.producthunt.com)** | **[🔥 爱发电支持](https://afdian.com/a/sherlock1412)**
 
 ## ✨ 功能特性
 
