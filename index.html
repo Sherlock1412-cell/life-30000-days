@@ -581,7 +581,7 @@
       navigator.serviceWorker.register('./sw.js').catch(() => {});
     }
     // Initialize Google AdSense ads
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    document.querySelectorAll('.adsbygoogle').forEach(function() { (adsbygoogle = window.adsbygoogle || []).push({}); });
   </script>
 </body>
 </html>
