@@ -13,7 +13,60 @@
     lifespan: 80,
     themeColor: '#6366f1',
     reminderEnabled: false,
+    isPremium: false,
   };
+
+  // ===== Premium 系统 =====
+  const PREMIUM_CONFIG = {
+    // 👇 你注册后填入你的链接
+    afdian: 'https://afdian.com/a/YOUR_USERNAME',    // 爱发电主页
+    buymeacoffee: 'https://buymeacoffee.com/YOUR_USERNAME',  // Buy Me a Coffee
+    // 👇 Premium 激活码（用户捐赠后你发给他们一个码）
+    activationCodes: [
+      // 示例: 'THANKS2024', 'LIFE30000'
+      // 实际使用时请更换为自定义的激活码
+    ],
+    // Premium 专属主题色
+    premiumColors: [
+      { color: '#06b6d4', name: '青' },
+      { color: '#f97316', name: '橙' },
+      { color: '#84cc16', name: '绿' },
+      { color: '#e879f9', name: '紫粉' },
+      { color: '#14b8a6', name: '碧' },
+      { color: '#f43f5e', name: '玫红' },
+      { color: '#a855f7', name: '紫' },
+      { color: '#eab308', name: '金' },
+      { color: '#64748b', name: '灰' },
+      { color: '#0ea5e9', name: '天蓝' },
+    ],
+    // Premium 专属壁纸风格
+    premiumStyles: [
+      { id: 'aurora', name: '🌌 极光', emoji: '🌌' },
+      { id: 'ocean_deep', name: '🌊 深海', emoji: '🌊' },
+      { id: 'sakura', name: '🌸 樱花', emoji: '🌸' },
+    ],
+  };
+
+  function getPremiumStatus() {
+    return localStorage.getItem('life30000_premium') === 'true';
+  }
+  function setPremiumStatus(val) {
+    localStorage.setItem('life30000_premium', val ? 'true' : 'false');
+    state.isPremium = val;
+  }
+  function activatePremium(code) {
+    if (PREMIUM_CONFIG.activationCodes.includes(code.toUpperCase())) {
+      setPremiumStatus(true);
+      return { success: true, message: '🎉 Premium 已激活！感谢你的支持！' };
+    }
+    return { success: false, message: '激活码无效，请检查后重试' };
+  }
+  function checkPremiumFeature(featureName) {
+    if (state.isPremium) return true;
+    showToast(`🔒 ${featureName} 是 Premium 功能，捐赠后即可解锁`);
+    showModal('support-modal');
+    return false;
+  }
 
   // 实例
   const whiteNoise = new WhiteNoisePlayer();
@@ -884,6 +937,34 @@
     document.querySelectorAll('.color-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.color === state.themeColor);
     });
+
+    // Premium 状态
+    state.isPremium = getPremiumStatus();
+    const statusText = document.getElementById('premium-status-text');
+    const activateRow = document.getElementById('premium-activate-row');
+    const premiumColorsDiv = document.getElementById('premium-colors');
+
+    if (state.isPremium) {
+      statusText.innerHTML = '<span class="premium-badge">✨ Premium 已激活</span>';
+      activateRow.style.display = 'none';
+      premiumColorsDiv.style.display = 'block';
+      // 渲染 Premium 专属色
+      const grid = document.getElementById('premium-color-grid');
+      grid.innerHTML = '';
+      PREMIUM_CONFIG.premiumColors.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'color-btn';
+        btn.dataset.color = c.color;
+        btn.style.background = c.color;
+        btn.title = c.name;
+        if (state.themeColor === c.color) btn.classList.add('active');
+        grid.appendChild(btn);
+      });
+    } else {
+      statusText.textContent = '捐赠后获得激活码，解锁 Premium 功能';
+      activateRow.style.display = 'flex';
+      premiumColorsDiv.style.display = 'none';
+    }
   }
 
   // ========== 事件绑定 ==========
@@ -1017,13 +1098,37 @@
     document.getElementById('joy-done').addEventListener('click', completeJoy);
 
     // === 支持/捐赠 ===
-    document.getElementById('support-btn').addEventListener('click', () => showModal('support-modal'));
+    document.getElementById('support-btn').addEventListener('click', () => {
+      // 设置链接
+      document.getElementById('link-afdian').href = PREMIUM_CONFIG.afdian;
+      document.getElementById('link-bmc').href = PREMIUM_CONFIG.buymeacoffee;
+      showModal('support-modal');
+    });
     document.getElementById('support-close').addEventListener('click', () => hideModal('support-modal'));
     document.querySelectorAll('.support-tier').forEach(tier => {
       tier.addEventListener('click', () => {
         document.querySelectorAll('.support-tier').forEach(t => t.classList.remove('selected'));
         tier.classList.add('selected');
       });
+    });
+
+    // === Premium 激活 ===
+    document.getElementById('premium-activate-btn').addEventListener('click', () => {
+      const code = document.getElementById('premium-code-input').value.trim();
+      if (!code) { showToast('请输入激活码'); return; }
+      const result = activatePremium(code);
+      showToast(result.message);
+      if (result.success) {
+        document.getElementById('premium-code-input').value = '';
+        initSettings();
+        // 重新渲染主题色选择器
+        const oldGrad = document.getElementById('progress-gradient');
+        if (oldGrad) oldGrad.remove();
+      }
+    });
+    // 回车激活
+    document.getElementById('premium-code-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('premium-activate-btn').click();
     });
 
     // === 小组件 ===
@@ -1036,13 +1141,14 @@
     document.getElementById('settings-lifespan').addEventListener('input', e => {
       document.getElementById('lifespan-value').textContent = e.target.value + ' 岁';
     });
-    document.querySelectorAll('.color-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        state.themeColor = btn.dataset.color;
-        document.documentElement.style.setProperty('--primary', state.themeColor);
-      });
+    // 使用事件委托，支持动态生成的 Premium 颜色按钮
+    document.getElementById('settings-modal').addEventListener('click', e => {
+      const btn = e.target.closest('.color-btn');
+      if (!btn) return;
+      document.querySelectorAll('#settings-modal .color-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.themeColor = btn.dataset.color;
+      document.documentElement.style.setProperty('--primary', state.themeColor);
     });
     document.getElementById('save-settings').addEventListener('click', () => {
       state.birthday = document.getElementById('settings-birthday').value;
@@ -1054,6 +1160,8 @@
         users[state.currentUser].lifespan = state.lifespan;
         saveUsers(users);
       }
+      // 保存主题色
+      localStorage.setItem('life30000_themeColor', state.themeColor);
       // 重置进度环渐变
       const oldGrad = document.getElementById('progress-gradient');
       if (oldGrad) oldGrad.remove();
@@ -1083,6 +1191,13 @@
   function init() {
     initParticles();
     bindEvents();
+    // 加载 Premium 状态和主题色
+    state.isPremium = getPremiumStatus();
+    const savedColor = localStorage.getItem('life30000_themeColor');
+    if (savedColor) {
+      state.themeColor = savedColor;
+      document.documentElement.style.setProperty('--primary', savedColor);
+    }
     const lastUser = storage('currentUser');
     if (lastUser) {
       const users = getUsers();

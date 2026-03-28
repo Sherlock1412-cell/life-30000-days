@@ -218,6 +218,13 @@
         <h3>🎯 趣味数据</h3>
         <div class="fun-grid" id="fun-grid"></div>
       </section>
+
+      <!-- 广告位 (中间位置) -->
+      <section class="main-ad-slot" id="main-ad-slot">
+        <!-- 👇 注册 Google AdSense 或穿山甲后，把广告代码粘贴到这里 -->
+        <!-- <ins class="adsbygoogle" ...></ins> -->
+        <div class="ad-placeholder">📢 广告位 — 接入广告平台后自动展示</div>
+      </section>
     </main>
   </div>
 
@@ -315,6 +322,10 @@
             <button class="color-btn" data-color="#ef4444" style="background:#ef4444"></button>
             <button class="color-btn" data-color="#8b5cf6" style="background:#8b5cf6"></button>
           </div>
+          <div class="premium-colors" id="premium-colors" style="display:none">
+            <label style="margin-top:8px;font-size:0.8rem;color:#f59e0b">✨ Premium 专属色</label>
+            <div class="theme-colors" id="premium-color-grid"></div>
+          </div>
         </div>
         <div class="setting-item">
           <label>每日提醒</label>
@@ -323,7 +334,27 @@
             <label for="settings-reminder" class="toggle"></label>
           </div>
         </div>
+        <div class="setting-item" id="premium-section">
+          <label>✨ Premium</label>
+          <div id="premium-status-text" style="color:var(--text-muted);font-size:0.85rem;margin-bottom:8px"></div>
+          <div class="premium-activate-row" id="premium-activate-row">
+            <input type="text" id="premium-code-input" placeholder="输入激活码" class="premium-code-input">
+            <button class="btn-secondary premium-activate-btn" id="premium-activate-btn">激活</button>
+          </div>
+          <div class="premium-benefits">
+            <span class="premium-benefit-item">🎨 10种专属主题色</span>
+            <span class="premium-benefit-item">📊 数据导出</span>
+            <span class="premium-benefit-item">🖼️ 专属壁纸风格</span>
+            <span class="premium-benefit-item">💛 支持独立开发者</span>
+          </div>
+        </div>
         <button class="btn-primary" id="save-settings">保存设置</button>
+        <!-- 广告位 (Google AdSense / 穿山甲) -->
+        <div class="ad-slot" id="ad-slot-settings" style="margin-top:16px">
+          <!-- 👇 注册广告平台后，把广告代码粘贴到这里 -->
+          <!-- <ins class="adsbygoogle" ...></ins> -->
+          <div class="ad-placeholder">📢 广告位</div>
+        </div>
       </div>
     </div>
   </div>
@@ -478,10 +509,23 @@
         </div>
       </div>
       <div class="support-qr-area" id="support-qr-area">
-        <p class="support-qr-hint">选择金额后，扫码支持 ☕</p>
-        <div class="support-qr-placeholder">📱 二维码区域<br><small>（接入微信/支付宝后显示）</small></div>
+        <p class="support-qr-hint">选择金额后，通过以下方式支持 ☕</p>
+        <div class="support-links">
+          <a href="#" class="support-link-btn" id="link-afdian" target="_blank" rel="noopener">
+            <span>🔥</span> 爱发电支持
+          </a>
+          <a href="#" class="support-link-btn" id="link-bmc" target="_blank" rel="noopener">
+            <span>☕</span> Buy Me a Coffee
+          </a>
+        </div>
+        <div class="support-qr-placeholder" id="qr-placeholder">
+          📱 或扫码支付<br>
+          <small>（在代码中填入你的收款二维码图片 URL 即可显示）</small>
+          <!-- 👇 在这里放你的收款二维码图片 -->
+          <!-- <img src="YOUR_QR_CODE_URL" style="width:200px"> -->
+        </div>
       </div>
-      <div class="support-thanks">💛 感谢每一份支持，让这个小应用走得更远</div>
+      <div class="support-thanks">💛 感谢每一份支持，捐赠后联系作者获取 Premium 激活码</div>
     </div>
   </div>
 
