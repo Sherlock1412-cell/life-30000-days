@@ -336,7 +336,7 @@
     const grid = document.getElementById('timeline-grid');
     grid.innerHTML = '';
     const livedYears = parseFloat(life.yearsOld);
-    for (let i = 0; i < Math.min(state.lifespan, 80); i++) {
+    for (let i = 0; i < state.lifespan; i++) {
       const dot = document.createElement('div');
       dot.className = 'timeline-day';
       if (i < Math.floor(livedYears)) dot.classList.add('lived');
@@ -555,9 +555,9 @@
         } else {
           whiteNoise.play(sound);
           item.classList.add('active');
+          recordNoise(whiteNoise.getActiveCount());
         }
         updateNoiseCount();
-        recordNoise(whiteNoise.getActiveCount());
       });
       const slider = item.querySelector('.noise-volume');
       slider.addEventListener('input', e => {
@@ -659,7 +659,7 @@
     document.getElementById('med-pause').textContent = '暂停';
     document.querySelectorAll('.med-preset').forEach(b => b.style.pointerEvents = 'auto');
     const activePreset = document.querySelector('.med-preset.active');
-    const minutes = parseInt(activePreset.dataset.minutes);
+    const minutes = activePreset ? parseInt(activePreset.dataset.minutes) : 5;
     document.getElementById('med-time').textContent = `${String(minutes).padStart(2,'0')}:00`;
     document.getElementById('med-progress').style.strokeDashoffset = '0';
   }

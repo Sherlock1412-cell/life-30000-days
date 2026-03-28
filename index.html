@@ -580,8 +580,10 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').catch(() => {});
     }
-    // Initialize Google AdSense ads
-    document.querySelectorAll('.adsbygoogle').forEach(function() { (adsbygoogle = window.adsbygoogle || []).push({}); });
+    // Initialize Google AdSense ads (safe — skip if script failed to load)
+    if (typeof window.adsbygoogle !== 'undefined') {
+      document.querySelectorAll('.adsbygoogle').forEach(function() { (window.adsbygoogle || []).push({}); });
+    }
   </script>
 </body>
 </html>

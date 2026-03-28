@@ -296,15 +296,20 @@ class WallpaperGenerator {
     const barX = (w - barW) / 2;
     const barY = h * 0.52;
     
+    const _roundRect = (x, y, w, h, r) => {
+      if (ctx.roundRect) { ctx.roundRect(x, y, w, h, r); }
+      else { ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.lineTo(x + w, y + h - r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.lineTo(x + r, y + h); ctx.arcTo(x, y + h, x, y, r); ctx.lineTo(x, y + r); ctx.arcTo(x, y, x + w, y, r); }
+    };
+
     ctx.fillStyle = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.06)';
     ctx.beginPath();
-    ctx.roundRect(barX, barY, barW, barH, 3);
+    _roundRect(barX, barY, barW, barH, 3);
     ctx.fill();
 
     const fillW = barW * (this.percentLived / 100);
     ctx.fillStyle = grad;
     ctx.beginPath();
-    ctx.roundRect(barX, barY, fillW, barH, 3);
+    _roundRect(barX, barY, fillW, barH, 3);
     ctx.fill();
 
     // 百分比

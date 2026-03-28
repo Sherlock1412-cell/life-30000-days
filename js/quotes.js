@@ -110,7 +110,7 @@ const QUOTES_DB = {
 };
 
 // 根据日期生成固定的每日金句
-function getDailyQuote(birthday) {
+function getDailyQuote() {
   const today = new Date();
   const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
   
