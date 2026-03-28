@@ -63,8 +63,20 @@
   <script>
     // 从 URL 参数或 localStorage 获取生日
     const params = new URLSearchParams(window.location.search);
-    const birthday = params.get('birthday') || localStorage.getItem('life30000_birthday');
-    const lifespan = parseInt(params.get('lifespan') || localStorage.getItem('life30000_lifespan') || '80');
+    let birthday = params.get('birthday');
+    let lifespan = parseInt(params.get('lifespan') || '80');
+    
+    // 从主应用用户数据中读取
+    if (!birthday) {
+      try {
+        const currentUser = JSON.parse(localStorage.getItem('life30000_currentUser'));
+        const users = JSON.parse(localStorage.getItem('life30000_users')) || {};
+        if (currentUser && users[currentUser]) {
+          birthday = users[currentUser].birthday;
+          lifespan = users[currentUser].lifespan || 80;
+        }
+      } catch {}
+    }
     
     if (birthday) {
       const birth = new Date(birthday);

@@ -85,7 +85,7 @@
 
     function resize() {
       canvas.width = window.innerWidth;
-      canvas。height = window.innerHeight;
+      canvas.height = window.innerHeight;
     }
     resize();
     window.addEventListener('resize', resize);
