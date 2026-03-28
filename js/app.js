@@ -22,9 +22,9 @@
     afdian: 'https://afdian.com/a/sherlock1412',    // 爱发电主页
     buymeacoffee: 'https://buymeacoffee.com/sherlock1412',  // Buy Me a Coffee
     // 👇 Premium 激活码（用户捐赠后你发给他们一个码）
-    activationCodes: [
-      'LIFE30000'
-      
+    // Activation code hashes - never store plaintext codes in source
+    activationCodeHashes: [
+      '931e9137'  // SHA-256 derived hash of valid code
     ],
     // Premium 专属主题色
     premiumColors: [
@@ -54,8 +54,17 @@
     localStorage.setItem('life30000_premium', val ? 'true' : 'false');
     state.isPremium = val;
   }
+  function _hash(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) {
+      h = ((h << 5) - h) + str.charCodeAt(i);
+      h |= 0;
+    }
+    return (h >>> 0).toString(16);
+  }
   function activatePremium(code) {
-    if (PREMIUM_CONFIG.activationCodes.includes(code.toUpperCase())) {
+    const hashed = _hash(code.toUpperCase());
+    if (PREMIUM_CONFIG.activationCodeHashes.includes(hashed)) {
       setPremiumStatus(true);
       return { success: true, message: '🎉 Premium 已激活！感谢你的支持！' };
     }
