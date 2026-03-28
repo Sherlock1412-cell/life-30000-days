@@ -1,8 +1,12 @@
-# 🌅 人生三万天
+# 🌅 Life 30,000 Days | 人生三万天
 
-> 每一天都是独一无二的礼物
+> Every day is a one-of-a-kind gift
+
+A beautiful mindfulness web app that visualizes your life's remaining days. Enter your birthday to see how many days you've lived and how many remain — with daily motivation, wallpapers, wellness tools, and more.
 
 一个关于时间、生命与珍惜的 Web 应用。通过输入出生年月日，计算你人生已度过的天数和剩余天数，生成每日激励语句和精美壁纸。
+
+**[🇺🇸 Product Hunt](https://www.producthunt.com)** | **[🔥 Live Demo](#)** | **[📖 文档](#-功能特性)**
 
 ## ✨ 功能特性
 
