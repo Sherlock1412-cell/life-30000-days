@@ -524,6 +524,11 @@ const ACHIEVEMENTS = [
   { id: 'noise_1', emoji: '🎵', title: '聆听者', desc: '播放白噪音 1 次', check: (s) => s.noisePlayCount >= 1 },
   { id: 'noise_mix', emoji: '🎶', title: '混音师', desc: '同时混合 3 种白噪音', check: (s) => s.maxNoiseMix >= 3 },
   
+  // 小确幸
+  { id: 'joy_1', emoji: '🌸', title: '小确幸发现者', desc: '完成第一次每日小确幸', check: (s) => s.joyCount >= 1 },
+  { id: 'joy_7', emoji: '🌺', title: '幸福收藏家', desc: '连续 7 天践行小确幸', check: (s) => s.joyStreak >= 7 },
+  { id: 'joy_30', emoji: '🌻', title: '阳光使者', desc: '连续 30 天践行小确幸', check: (s) => s.joyStreak >= 30 },
+
   // 特殊成就
   { id: 'quote_copy', emoji: '📋', title: '金句收集者', desc: '复制金句 5 次', check: (s) => s.quotesCopied >= 5 },
   { id: 'all_categories', emoji: '🌟', title: '全能选手', desc: '解锁 5 个不同类别的成就', check: (s) => s.categoriesUnlocked >= 5 },
@@ -562,6 +567,23 @@ class AchievementSystem {
     let visitDays = 0;
     try { visitDays = (JSON.parse(localStorage.getItem('life30000_visits')) || []).length; } catch {}
 
+    // 小确幸数据
+    let joyCount = 0;
+    let joyStreak = 0;
+    try {
+      const joyData = JSON.parse(localStorage.getItem('life30000_joy')) || {};
+      joyCount = Object.values(joyData).filter(j => j.done).length;
+      // 计算连续天数
+      const today = new Date();
+      for (let i = 0; i < 365; i++) {
+        const d = new Date(today);
+        d.setDate(d.getDate() - i);
+        const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        if (joyData[key] && joyData[key].done) { joyStreak++; }
+        else if (i > 0) { break; }
+      }
+    } catch {}
+
     const stats = {
       daysLived,
       visitDays,
@@ -576,6 +598,8 @@ class AchievementSystem {
       maxNoiseMix: 0,
       quotesCopied: 0,
       categoriesUnlocked: 0,
+      joyCount,
+      joyStreak,
       ...extraStats,
     };
 
@@ -599,6 +623,7 @@ class AchievementSystem {
         else if (id.includes('challenge')) categories.add('challenge');
         else if (id.includes('wallpaper')) categories.add('wallpaper');
         else if (id.includes('noise')) categories.add('noise');
+        else if (id.includes('joy')) categories.add('joy');
         else if (id.includes('age') || id.includes('days')) categories.add('life');
         else categories.add('other');
       }

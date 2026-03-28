@@ -1848,3 +1848,281 @@ input[type="checkbox"]:checked + .toggle::after {
   font-size: 1rem;
   font-weight: 700;
 }
+
+/* ===== 年度进度环 ===== */
+.year-ring-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+
+.year-ring-card h3 { margin-bottom: 20px; font-size: 1.1rem; }
+
+.year-ring-content {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.year-ring-visual {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+}
+
+.year-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.year-ring-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.year-ring-percent {
+  font-size: 2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #10b981, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.year-ring-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.year-ring-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.year-stat {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+}
+
+.year-stat-num {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.year-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ===== 每日小确幸 ===== */
+.joy-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.joy-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #10b981, #f59e0b, #ec4899);
+}
+
+.joy-card h3 { margin-bottom: 6px; font-size: 1.1rem; }
+
+.joy-desc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.joy-reminder {
+  padding: 20px;
+  background: rgba(16,185,129,0.06);
+  border-left: 3px solid #10b981;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+.joy-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.joy-btn {
+  padding: 10px 24px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.joy-btn:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.joy-btn-primary {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-color: #10b981;
+}
+.joy-btn-primary:hover {
+  box-shadow: 0 4px 15px rgba(16,185,129,0.4);
+  transform: translateY(-2px);
+}
+
+.joy-streak-info {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===== 支持/捐赠弹窗 ===== */
+.support-desc {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.support-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.support-tier {
+  padding: 20px 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.support-tier:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-2px);
+}
+.support-tier.featured {
+  border-color: #f59e0b;
+  background: rgba(245,158,11,0.08);
+  position: relative;
+}
+.support-tier.featured::after {
+  content: '推荐';
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  padding: 2px 8px;
+  background: #f59e0b;
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 4px;
+}
+.support-tier.selected {
+  border-color: var(--primary);
+  background: rgba(99,102,241,0.12);
+}
+
+.tier-emoji { font-size: 2rem; margin-bottom: 8px; }
+.tier-title { font-weight: 600; margin-bottom: 4px; font-size: 0.95rem; }
+.tier-price {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--primary-light);
+  margin-bottom: 4px;
+}
+.tier-desc { font-size: 0.75rem; color: var(--text-muted); }
+
+.support-qr-area {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius);
+}
+
+.support-qr-hint {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.support-qr-placeholder {
+  padding: 40px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.support-thanks {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===== 响应式适配 ===== */
+@media (max-width: 640px) {
+  .year-ring-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .year-ring-visual {
+    width: 140px;
+    height: 140px;
+  }
+
+  .year-ring-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .year-stat {
+    flex: 1;
+    min-width: 80px;
+  }
+
+  .support-tiers {
+    grid-template-columns: 1fr;
+  }
+
+  .joy-actions {
+    flex-direction: column;
+  }
+
+  .year-ring-card, .joy-card {
+    padding: 20px;
+  }
+}

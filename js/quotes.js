@@ -77,6 +77,35 @@ const QUOTES_DB = {
     { text: "Be the change you wish to see in the world.", author: "Mahatma Gandhi" },
     { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" },
     { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
+  ],
+  // 温馨类
+  warmth: [
+    { text: "愿你所到之处，遍地阳光；愿你所梦之景，皆能如愿。", author: "未知" },
+    { text: "世界很大，幸福很小。有你们在，刚刚好。", author: "未知" },
+    { text: "被人理解是幸运的，但不被理解也未必不幸。", author: "周国平" },
+    { text: "你要记得那些黑暗中默默抱紧你的人，逗你笑的人，陪你彻夜聊天的人。", author: "佚名" },
+    { text: "万物皆有裂痕，那是光照进来的地方。", author: "Leonard Cohen" },
+    { text: "请相信，这个世界上真的有人在过着你想要的生活。", author: "大冰" },
+    { text: "总有人间一两风，填我十万八千梦。", author: "未知" },
+    { text: "星光不问赶路人，时光不负有心人。", author: "未知" },
+    { text: "愿你眼中总有光芒，活成你想要的模样。", author: "未知" },
+    { text: "岁月不居，时节如流。愿你安好，日日是好日。", author: "改编" },
+    { text: "人生就像一盒巧克力，你永远不知道下一颗是什么味道。", author: "《阿甘正传》" },
+    { text: "我们都在阴沟里，但仍有人仰望星空。", author: "王尔德" },
+    { text: "愿你历尽千帆，归来仍是少年。", author: "未知" },
+    { text: "生活明朗，万物可爱。人间值得，未来可期。", author: "未知" },
+    { text: "你来人间一趟，你要看看太阳，和你的心上人，一起走在街上。", author: "海子" },
+  ],
+  // 季节类
+  seasonal: [
+    { text: "春天从不迟到，它只是偶尔绕了远路。", author: "未知" },
+    { text: "夏日的遗憾，一定会被秋风温柔化解。", author: "未知" },
+    { text: "冬日暖阳，好日常在。人间烟火，谁能不爱。", author: "未知" },
+    { text: "秋天的风，都是从往年吹来的。", author: "木心" },
+    { text: "每一个季节，都是一次重生的机会。", author: "未知" },
+    { text: "春风十里，不如你的微笑。", author: "未知" },
+    { text: "盛夏白瓷梅子汤，碎冰碰壁当啷响。", author: "未知" },
+    { text: "雪夜里，生暖炉，促足相依偎，静闻雪落无痕。", author: "未知" },
   ]
 };
 

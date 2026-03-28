@@ -103,6 +103,7 @@
         <button class="nav-btn" id="wallpaper-btn" title="生成壁纸">🎨</button>
         <button class="nav-btn" id="widget-btn" title="小组件">📱</button>
         <button class="nav-btn" id="tips-btn" title="解压小贴士">💡</button>
+        <button class="nav-btn" id="support-btn" title="支持我们">☕</button>
         <button class="nav-btn" id="settings-btn" title="设置">⚙️</button>
         <button class="nav-btn" id="logout-btn" title="退出">👋</button>
       </div>
@@ -154,6 +155,45 @@
           <button class="quote-btn" id="share-quote" title="分享">📤</button>
           <button class="quote-btn" id="copy-quote" title="复制">📋</button>
         </div>
+      </section>
+
+      <!-- 年度进度环 -->
+      <section class="year-ring-card" id="year-ring-card">
+        <h3>📅 今年进度</h3>
+        <div class="year-ring-content">
+          <div class="year-ring-visual">
+            <svg class="year-ring-svg" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
+              <circle cx="100" cy="100" r="85" fill="none" stroke="url(#year-gradient)" stroke-width="6"
+                stroke-linecap="round" stroke-dasharray="534.07" stroke-dashoffset="534.07"
+                transform="rotate(-90 100 100)" id="year-progress-circle"/>
+              <defs>
+                <linearGradient id="year-gradient"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#6366f1"/></linearGradient>
+              </defs>
+            </svg>
+            <div class="year-ring-text">
+              <div class="year-ring-percent" id="year-percent">0%</div>
+              <div class="year-ring-label">年度进度</div>
+            </div>
+          </div>
+          <div class="year-ring-stats">
+            <div class="year-stat"><span class="year-stat-num" id="year-days-passed">0</span><span class="year-stat-label">天已过</span></div>
+            <div class="year-stat"><span class="year-stat-num" id="year-days-left">0</span><span class="year-stat-label">天剩余</span></div>
+            <div class="year-stat"><span class="year-stat-num" id="year-weeks">0</span><span class="year-stat-label">周已过</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 每日小确幸 -->
+      <section class="joy-card" id="joy-card">
+        <h3>🌸 今日小确幸</h3>
+        <p class="joy-desc">生活中的小美好，值得被记录</p>
+        <div class="joy-reminder" id="joy-reminder"></div>
+        <div class="joy-actions">
+          <button class="joy-btn" id="joy-refresh" title="换一个">🔄 换一个</button>
+          <button class="joy-btn joy-btn-primary" id="joy-done" title="今天做到了">✅ 今天做到了</button>
+        </div>
+        <div class="joy-streak-info" id="joy-streak-info"></div>
       </section>
 
       <!-- 生命时间线 -->
@@ -411,6 +451,40 @@
     </div>
   </div>
 
+  <!-- ===== 支持/捐赠弹窗 ===== -->
+  <div class="modal" id="support-modal">
+    <div class="modal-content support-modal-content">
+      <button class="modal-close" id="support-close">&times;</button>
+      <h2>☕ 支持「人生三万天」</h2>
+      <p class="support-desc">如果这个应用给你带来了温暖，欢迎请我喝杯咖啡 ☕</p>
+      <div class="support-tiers">
+        <div class="support-tier" data-amount="5">
+          <div class="tier-emoji">☕</div>
+          <div class="tier-title">一杯咖啡</div>
+          <div class="tier-price">¥5</div>
+          <div class="tier-desc">给开发者一点鼓励</div>
+        </div>
+        <div class="support-tier featured" data-amount="25">
+          <div class="tier-emoji">🍵</div>
+          <div class="tier-title">一壶好茶</div>
+          <div class="tier-price">¥25</div>
+          <div class="tier-desc">解锁 Premium 主题色 × 10</div>
+        </div>
+        <div class="support-tier" data-amount="99">
+          <div class="tier-emoji">🌟</div>
+          <div class="tier-title">星光支持者</div>
+          <div class="tier-price">¥99</div>
+          <div class="tier-desc">永久 Premium + 名字上墙</div>
+        </div>
+      </div>
+      <div class="support-qr-area" id="support-qr-area">
+        <p class="support-qr-hint">选择金额后，扫码支持 ☕</p>
+        <div class="support-qr-placeholder">📱 二维码区域<br><small>（接入微信/支付宝后显示）</small></div>
+      </div>
+      <div class="support-thanks">💛 感谢每一份支持，让这个小应用走得更远</div>
+    </div>
+  </div>
+
   <!-- ===== 成就解锁通知 ===== -->
   <div class="achievement-toast" id="achievement-toast">
     <div class="achievement-toast-icon" id="ach-toast-icon"></div>
@@ -430,7 +504,7 @@
   <script src="js/app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
     }
   </script>
 </body>

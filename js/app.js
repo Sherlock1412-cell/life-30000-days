@@ -212,6 +212,10 @@
     updateMilestones(life);
     // 趣味数据
     updateFunStats(life);
+    // 年度进度环
+    updateYearRing();
+    // 每日小确幸
+    updateJoyCard();
 
     // 检查成就
     recordVisit();
@@ -333,6 +337,142 @@
       item.innerHTML = `<div class="fun-emoji">${s.emoji}</div><div class="fun-value">${s.value}</div><div class="fun-label">${s.label}</div>`;
       grid.appendChild(item);
     });
+  }
+
+  // ========== 年度进度环 ==========
+  function updateYearRing() {
+    const now = new Date();
+    const yearStart = new Date(now.getFullYear(), 0, 1);
+    const yearEnd = new Date(now.getFullYear() + 1, 0, 1);
+    const daysThisYear = Math.floor((now - yearStart) / 86400000) + 1;
+    const totalDaysInYear = Math.floor((yearEnd - yearStart) / 86400000);
+    const percent = ((daysThisYear / totalDaysInYear) * 100).toFixed(1);
+    const daysLeft = totalDaysInYear - daysThisYear;
+    const weeksPassed = Math.floor(daysThisYear / 7);
+
+    document.getElementById('year-percent').textContent = percent + '%';
+    document.getElementById('year-days-passed').textContent = daysThisYear;
+    document.getElementById('year-days-left').textContent = daysLeft;
+    document.getElementById('year-weeks').textContent = weeksPassed;
+
+    // 更新环形进度
+    const circle = document.getElementById('year-progress-circle');
+    const circumference = 2 * Math.PI * 85;
+    const offset = circumference - (parseFloat(percent) / 100) * circumference;
+    circle.style.strokeDasharray = circumference;
+    setTimeout(() => { circle.style.strokeDashoffset = offset; }, 300);
+  }
+
+  // ========== 每日小确幸 ==========
+  const DAILY_JOYS = [
+    { emoji: '☀️', text: '今天出门前，抬头看看天空，感受阳光洒在脸上的一刻' },
+    { emoji: '🍵', text: '给自己泡一杯喜欢的茶或咖啡，慢慢品味第一口' },
+    { emoji: '📖', text: '读10页书，不需要读完一章，享受阅读的过程' },
+    { emoji: '🎵', text: '听一首让你开心的歌，可以跟着哼唱或轻声唱出来' },
+    { emoji: '🌿', text: '找一株植物认真观察一分钟，看看它的颜色和纹理' },
+    { emoji: '💬', text: '给一个你很久没联系的朋友发条消息，简单问声好' },
+    { emoji: '📸', text: '拍一张今天让你觉得好看的照片，不需要多完美' },
+    { emoji: '🧘', text: '做3分钟深呼吸，闭上眼睛，感受一呼一吸' },
+    { emoji: '🍎', text: '慢慢吃一个水果，感受它的味道、质地和香气' },
+    { emoji: '📝', text: '写下3件今天让你感恩的小事，再小的事也算' },
+    { emoji: '🌙', text: '今晚睡前不看手机，安静地躺5分钟' },
+    { emoji: '🤗', text: '今天给自己一个拥抱，或者抱抱你爱的人/宠物' },
+    { emoji: '🚶', text: '出门散步15分钟，不需要目的地，随意走走' },
+    { emoji: '🌸', text: '留意窗外的一棵树或一朵花，看看今天它有什么不同' },
+    { emoji: '😊', text: '对镜子里的自己微笑10秒钟，说一句"你很棒"' },
+    { emoji: '🧹', text: '整理一个小角落，不需要大扫除，一个抽屉就好' },
+    { emoji: '💧', text: '今天好好喝水，每个小时提醒自己喝一杯' },
+    { emoji: '🎭', text: '给家人或朋友讲一个你今天遇到的有趣的事' },
+    { emoji: '🕯️', text: '点一支蜡烛（或开一盏暖色灯），安静地坐10分钟' },
+    { emoji: '🎨', text: '随手涂鸦5分钟，不需要画得多好，释放创造力' },
+    { emoji: '🌈', text: '出门找3种不同颜色的东西，认真观察它们' },
+    { emoji: '💤', text: '允许自己什么都不做，只是发呆10分钟' },
+    { emoji: '🎁', text: '给自己买一个小东西，不需要贵，让自己开心就好' },
+    { emoji: '🎶', text: '闭上眼睛，听3分钟大自然的声音（或白噪音）' },
+    { emoji: '✍️', text: '写一段话给一年后的自己，说说现在的心情' },
+    { emoji: '🐱', text: '和家里的宠物玩10分钟，或在网上看可爱的动物' },
+    { emoji: '🌾', text: '吃一顿不看手机的饭，认真品尝每一口' },
+    { emoji: '🌻', text: '对一个服务人员说声真诚的"谢谢"，看着对方的眼睛' },
+  ];
+
+  let currentJoyIndex = 0;
+  function getDailyJoy() {
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+    currentJoyIndex = dayOfYear % DAILY_JOYS.length;
+    return DAILY_JOYS[currentJoyIndex];
+  }
+
+  function updateJoyCard() {
+    const joy = getDailyJoy();
+    document.getElementById('joy-reminder').innerHTML = `<span style="font-size:1.5rem;margin-right:12px">${joy.emoji}</span>${joy.text}`;
+
+    // 检查今天是否已完成
+    const joyData = getJoyData();
+    const today = getTodayKey();
+    const isDone = joyData[today] && joyData[today].done;
+    const doneBtn = document.getElementById('joy-done');
+    if (isDone) {
+      doneBtn.textContent = '✅ 今天已完成';
+      doneBtn.disabled = true;
+      doneBtn.style.opacity = '0.6';
+    } else {
+      doneBtn.textContent = '✅ 今天做到了';
+      doneBtn.disabled = false;
+      doneBtn.style.opacity = '1';
+    }
+
+    // 显示连续天数
+    const streak = getJoyStreak();
+    const info = document.getElementById('joy-streak-info');
+    if (streak > 0) {
+      info.textContent = `🔥 已连续 ${streak} 天践行小确幸`;
+    } else {
+      info.textContent = '点击「今天做到了」开始你的小确幸之旅 ✨';
+    }
+  }
+
+  function refreshJoy() {
+    currentJoyIndex = (currentJoyIndex + 1) % DAILY_JOYS.length;
+    const joy = DAILY_JOYS[currentJoyIndex];
+    const el = document.getElementById('joy-reminder');
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.innerHTML = `<span style="font-size:1.5rem;margin-right:12px">${joy.emoji}</span>${joy.text}`;
+      el.style.opacity = '1';
+    }, 300);
+  }
+
+  function completeJoy() {
+    const joyData = getJoyData();
+    const today = getTodayKey();
+    joyData[today] = { done: true, completedAt: new Date().toISOString() };
+    saveJoyData(joyData);
+    updateJoyCard();
+    showToast('🌸 今天的美好已记录，真棒！');
+    checkAchievements();
+  }
+
+  function getJoyData() {
+    try { return JSON.parse(localStorage.getItem('life30000_joy')) || {}; } catch { return {}; }
+  }
+  function saveJoyData(data) { localStorage.setItem('life30000_joy', JSON.stringify(data)); }
+  function getTodayKey() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+  function getJoyStreak() {
+    const all = getJoyData();
+    let streak = 0;
+    const today = new Date();
+    for (let i = 0; i < 365; i++) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      if (all[key] && all[key].done) { streak++; }
+      else if (i > 0) { break; }
+    }
+    return streak;
   }
 
   // ========== 白噪音 ==========
@@ -678,9 +818,30 @@
         <div class="tip-card-title">${t.emoji} ${t.title}</div>
         <div class="tip-card-desc">${t.desc}</div></div>`).join('')}</div>`;
     } else if (category === 'quotes') {
-      content.innerHTML = `<div class="tips-list">${TIPS_DATA.quotes.items.map(q=>`<div class="tip-card" style="cursor:pointer" onclick="navigator.clipboard&&navigator.clipboard.writeText('${q.text}')">
-        <div class="tip-card-title">${q.emoji}</div>
-        <div class="tip-card-desc" style="font-size:1.05rem;line-height:1.8">${q.text}</div></div>`).join('')}</div>`;
+      const quotesContainer = document.createElement('div');
+      quotesContainer.className = 'tips-list';
+      TIPS_DATA.quotes.items.forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'tip-card';
+        card.style.cursor = 'pointer';
+        const titleEl = document.createElement('div');
+        titleEl.className = 'tip-card-title';
+        titleEl.textContent = q.emoji;
+        const descEl = document.createElement('div');
+        descEl.className = 'tip-card-desc';
+        descEl.style.cssText = 'font-size:1.05rem;line-height:1.8';
+        descEl.textContent = q.text;
+        card.appendChild(titleEl);
+        card.appendChild(descEl);
+        card.addEventListener('click', () => {
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(q.text).then(() => showToast('已复制！'));
+          }
+        });
+        quotesContainer.appendChild(card);
+      });
+      content.innerHTML = '';
+      content.appendChild(quotesContainer);
     }
   }
 
@@ -849,6 +1010,20 @@
       if (breathingExercise) breathingExercise.stop();
       if (bubbleGame) bubbleGame.stop();
       hideModal('tips-modal');
+    });
+
+    // === 每日小确幸 ===
+    document.getElementById('joy-refresh').addEventListener('click', refreshJoy);
+    document.getElementById('joy-done').addEventListener('click', completeJoy);
+
+    // === 支持/捐赠 ===
+    document.getElementById('support-btn').addEventListener('click', () => showModal('support-modal'));
+    document.getElementById('support-close').addEventListener('click', () => hideModal('support-modal'));
+    document.querySelectorAll('.support-tier').forEach(tier => {
+      tier.addEventListener('click', () => {
+        document.querySelectorAll('.support-tier').forEach(t => t.classList.remove('selected'));
+        tier.classList.add('selected');
+      });
     });
 
     // === 小组件 ===
